@@ -1,0 +1,882 @@
+Empty set
+mysql> select * from Persons where LastName like '[_
+]%';
+Empty set
+mysql> select * from Persons where LastName like '[C
+]%';
+Empty set
+mysql> select * from Persons where LastName like '['A
+']%';
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'A']%'' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'A
+']%'' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+    -> 
+    -> 
+    -> ;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+mysql> select * from Persons where LastName in ('Adams', 'Carter');
++------+----------+-----------+----------------+---------+
+| ID_P | LastName | FirstName | Address        | City    |
++------+----------+-----------+----------------+---------+
+|    1 | Adams    | John      | Oxford Street  | London  |
+|    3 | Carter   | Thomas    | Changan Street | Beijing |
+|    4 | Carter   | William   | Xuanwumen 10   | Beijing |
++------+----------+-----------+----------------+---------+
+3 rows in set
+
+mysql> select * from Persons where LastName between 'Adams' and 'Carter';
++------+----------+-----------+----------------+----------+
+| ID_P | LastName | FirstName | Address        | City     |
++------+----------+-----------+----------------+----------+
+|    1 | Adams    | John      | Oxford Street  | London   |
+|    2 | Bush     | George    | Fifth Avenue   | New York |
+|    3 | Carter   | Thomas    | Changan Street | Beijing  |
+|    4 | Carter   | William   | Xuanwumen 10   | Beijing  |
++------+----------+-----------+----------------+----------+
+4 rows in set
+
+mysql> select * from Persons where LastName between 'Adams' and 'Bush';
++------+----------+-----------+---------------+----------+
+| ID_P | LastName | FirstName | Address       | City     |
++------+----------+-----------+---------------+----------+
+|    1 | Adams    | John      | Oxford Street | London   |
+|    2 | Bush     | George    | Fifth Avenue  | New York |
++------+----------+-----------+---------------+----------+
+2 rows in set
+
+mysql> select * from Persons where LastName 
+    -> not between 'Adams' and 'Bush
+';
++------+----------+-----------+----------------+---------+
+| ID_P | LastName | FirstName | Address        | City    |
++------+----------+-----------+----------------+---------+
+|    3 | Carter   | Thomas    | Changan Street | Beijing |
+|    4 | Carter   | William   | Xuanwumen 10   | Beijing |
++------+----------+-----------+----------------+---------+
+2 rows in set
+mysql> select * from Persons;
++------+----------+-----------+----------------+----------+
+| ID_P | LastName | FirstName | Address        | City     |
++------+----------+-----------+----------------+----------+
+|    1 | Adams    | John      | Oxford Street  | London   |
+|    2 | Bush     | George    | Fifth Avenue   | New York |
+|    3 | Carter   | Thomas    | Changan Street | Beijing  |
+|    4 | Carter   | William   | Xuanwumen 10   | Beijing  |
++------+----------+-----------+----------------+----------+
+4 rows in set
+
+mysql> select * from Orders;
++----------+-------------+
+| Company  | OrderNumber |
++----------+-------------+
+| IBM      | 3532        |
+| W3School | 2356        |
+| Apple    | 4698        |
+| W3School | 6953        |
++----------+-------------+
+4 rows in set
+
+mysql> select LastName as Family, FirstName as Name;
+1054 - Unknown column 'LastName' in 'field list'
+mysql> select LastName as Family, FirstName as Name from Persons;
++--------+---------+
+| Family | Name    |
++--------+---------+
+| Adams  | John    |
+| Bush   | George  |
+| Carter | Thomas  |
+| Carter | William |
++--------+---------+
+4 rows in set
+
+mysql> select * into Persons_backup from Persons;
+1327 - Undeclared variable: Persons_backup
+mysql> select * into table 
+Persons_backup from Persons;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table Persons_backup from Persons' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table
+Persons_backup from Persons' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+    -> 
+    -> 
+    -> ;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+mysql> create table Persons_backup;
+1113 - A table must have at least 1 column
+mysql> create table Persons_backup
+    -> (
+    -> ID_P int,
+    -> LastName varchar(255),
+    -> FirstName varchar(255),
+    -> City varchar(255)
+    -> );
+Query OK, 0 rows affected
+
+mysql> select * into Persons_backup from Persons;
+1327 - Undeclared variable: Persons_backup
+mysql> select * into Persons_backup
+ from Persons;
+1327 - Undeclared variable: Persons_backup
+1327 - Undeclared variable: Persons_backup
+    -> 
+    -> ;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1327 - Undeclared variable: Persons_backup' at line 1
+mysql> create database my_db;
+Query OK, 1 row affected
+
+mysql> use my_db;
+Database changed
+mysql> use MySQL;
+Database changed
+mysql> alert table Persons
+    -> add constraint uc_PersonID unique(ID_P, LastName);
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'alert table Persons
+
+add constraint uc_PersonID unique(ID_P, LastName)' at line 1
+mysql> alert table Persons add unique(ID_P);
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'alert table Persons add unique(ID_P)' at line 1
+mysql> manual;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'manual' at line 1
+mysql> ALTER TABLE Persons
+ADD UNIQUE (Id_P)
+    -> ;
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Persons add constraints uc_PersonID unique(ID_P, LastName);
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'uc_PersonID unique(ID_P, LastName)' at line 1
+mysql> alert
+ table Persons add constraints uc_PersonID unique(ID_P, LastName);
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'alert table Persons add constraints uc_PersonID unique(ID_P, LastName)';
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'alert
+ table Persons add constraints uc_PersonID unique(ID_P, LastName)' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+mysql> alert table Persons add constraints uc_PersonID unique(ID_P, LastName);
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'alert table Persons add constraints uc_PersonID unique(ID_P, LastName)' at line 1
+mysql> alter table Persons add constraint
+ uc_PersonID unique(ID_P, LastName);
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> alter table Persons drop index uc_PersonID;
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Persons add primary key (ID_P);
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Persons drop primary key;
+Query OK, 4 rows affected
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from Orders;
++----------+-------------+
+| Company  | OrderNumber |
++----------+-------------+
+| IBM      | 3532        |
+| W3School | 2356        |
+| Apple    | 4698        |
+| W3School | 6953        |
++----------+-------------+
+4 rows in set
+
+mysql> alter table Orders add row ID_P int;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ID_P int' at line 1
+mysql> 
+mysql> alter table Orders add row (ID_P int)
+;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(ID_P int)' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(ID_P int)' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+    -> 
+    -> ;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+mysql> alter table Orders add column (ID_P int);
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ;
+1065 - Query was empty
+mysql> alter table Orders add column (ID_P int);
+1060 - Duplicate column name 'ID_P'
+mysql> alter table Orsers alter column ID_P default 0;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'default 0' at line 1
+mysql> alter table Ord
+ers alter column ID_P default 0;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'default 0' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ers alter column ID_P default 0' at line 2
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+    -> alter table Ord
+ers alter column ID_P default 0;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'default 0' at line 1;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+mysql> alter table Orders alter ID_P set default 0; 
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Orders alter ID_P drop default;
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Orders alter City set default 0;
+1054 - Unknown column 'City' in 'orders'
+mysql> alter table Orders alter ID_P set default 0;
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Orders alter ID_P drop default;
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> create index PersonIndex On Person(LastName);
+1146 - Table 'mysql.person' doesn't exist
+mysql> create index PersonIndex On Persons(LastName);
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> create index PersonIndex on Persons(FirstName, LastName);
+1061 - Duplicate key name 'PersonIndex'
+mysql> create index PersonIndex2
+ on Persons(FirstName, LastName);
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> create unique index index on Persons(LastName);
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'index on Persons(LastName)' at line 1
+mysql> create unique index inde0
+x on Persons(LastName);
+
+1062 - Duplicate entry 'Carter' for key 'inde0x'
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'x on Persons(LastName)' at line 2
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1062 - Duplicate entry 'Carter' for key 'inde0x'
+
+create unique index inde0
+' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1062 - Duplicate entry 'Carter' for key 'inde0x'
+1064 - You have an error in yo' at line 1
+    -> ;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+mysql> drop index PersonIndex on Persons;
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> drop index PersonIndex2
+ on Persons;
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> drop database my_db;
+Query OK, 0 rows affected
+
+mysql> truncate table Orders;
+Query OK, 0 rows affected
+
+mysql> select * from Persons;
++------+----------+-----------+----------------+----------+
+| ID_P | LastName | FirstName | Address        | City     |
++------+----------+-----------+----------------+----------+
+|    1 | Adams    | John      | Oxford Street  | London   |
+|    2 | Bush     | George    | Fifth Avenue   | New York |
+|    3 | Carter   | Thomas    | Changan Street | Beijing  |
+|    4 | Carter   | William   | Xuanwumen 10   | Beijing  |
++------+----------+-----------+----------------+----------+
+4 rows in set
+
+mysql> alter table Persons add Birthday date;
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Persons alter column Birthday year;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'year' at line 1
+mysql> alter table Persons alter column Birthday year;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'year' at line 1
+mysql> alter table Persons alter column Birthday date;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'date' at line 1
+mysql> alter table Persons drop column Birthday;
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Persons add Birthday year;
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Persons alter column Birthday date;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'date' at line 1
+mysql> alter table Persons alter 
+Birthday date;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'date' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'date' at line 2
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+    -> ;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+mysql> alter table Persons alter Birthday date;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'date' at line 1
+mysql> select * from Persons;;
++------+----------+-----------+----------------+----------+----------+
+| ID_P | LastName | FirstName | Address        | City     | Birthday |
++------+----------+-----------+----------------+----------+----------+
+|    1 | Adams    | John      | Oxford Street  | London   | NULL     |
+|    2 | Bush     | George    | Fifth Avenue   | New York | NULL     |
+|    3 | Carter   | Thomas    | Changan Street | Beijing  | NULL     |
+|    4 | Carter   | William   | Xuanwumen 10   | Beijing  | NULL     |
++------+----------+-----------+----------------+----------+----------+
+4 rows in set
+
+1065 - Query was empty
+mysql> alter table Persons drop column Birthday;
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Persons alter column ID_P int not null auto_increment;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'int not null auto_increment' at line 1
+mysql> alter table Persons alter column ID_P int not null identity(1,1);
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'int not null identity(1,1)' at line 1
+mysql> select * from Products;
+1146 - Table 'mysql.products' doesn't exist
+mysql> list table;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'list table' at line 1
+mysql> list tables;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'list tables' at line 1
+mysql> create view Persons_view as 
+    -> select LastName from Persons;
+Query OK, 0 rows affected
+
+mysql> select * from Persons_View;
++----------+
+| LastName |
++----------+
+| Adams    |
+| Bush     |
+| Carter   |
+| Carter   |
++----------+
+4 rows in set
+
+mysql> create view ID_Above_AVG_Person as 
+    -> select ID_P, LastName
+    -> from Persons
+    -> where ID_P>(select AVG(ID_P) from Persons);
+Query OK, 0 rows affected
+
+mysql> select * from ID_Above_AVG_Person;
++------+----------+
+| ID_P | LastName |
++------+----------+
+|    3 | Carter   |
+|    4 | Carter   |
++------+----------+
+2 rows in set
+
+mysql> drop view ID_Above_AVG_Person;
+Query OK, 0 rows affected
+
+mysql> drop view Persons_View;
+Query OK, 0 rows affected
+
+mysql> alter table Orders add Order_Date date;
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Orders add Order_Date date default now();
+1067 - Invalid default value for 'Order_Date'
+mysql> alter table Orders alter Order_Date date default now();
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'date default now()' at line 1
+mysql> alter table Orders alter column Order_Date default now();
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'default now()' at line 1
+mysql> alter table Orders drop column Order_Date;
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Orders add Order_Date date default now();
+1067 - Invalid default value for 'Order_Date'
+mysql> alter table Orders add Order_Date date default curdate();
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'curdate()' at line 1
+mysql> select avg(ID_P) from Persons;
++-----------+
+| avg(ID_P) |
++-----------+
+| 2.5000    |
++-----------+
+1 row in set
+
+mysql> select avg(ID_P) as avg_ID from Persons;
++--------+
+| avg_ID |
++--------+
+| 2.5000 |
++--------+
+1 row in set
+
+mysql> select LastName from Persons where ID_P > (select avg(ID_P) from Persons);
++----------+
+| LastName |
++----------+
+| Carter   |
+| Carter   |
++----------+
+2 rows in set
+
+mysql> select LastName from Persons where ID_P < (select avg(ID_P) from Persons);
++----------+
+| LastName |
++----------+
+| Adams    |
+| Bush     |
++----------+
+2 rows in set
+
+mysql> select count(ID_P) from Persons;
++-------------+
+| count(ID_P) |
++-------------+
+|           4 |
++-------------+
+1 row in set
+
+mysql> select count(Date) from Persons;
+1054 - Unknown column 'Date' in 'field list'
+mysql> select * from Persons;
++------+----------+-----------+----------------+----------+
+| ID_P | LastName | FirstName | Address        | City     |
++------+----------+-----------+----------------+----------+
+|    1 | Adams    | John      | Oxford Street  | London   |
+|    2 | Bush     | George    | Fifth Avenue   | New York |
+|    3 | Carter   | Thomas    | Changan Street | Beijing  |
+|    4 | Carter   | William   | Xuanwumen 10   | Beijing  |
++------+----------+-----------+----------------+----------+
+4 rows in set
+
+mysql> alter table Persons add Birth date default getDate();
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'getDate()' at line 1
+mysql> alter table Persons add Birth date default now();
+1067 - Invalid default value for 'Birth'
+mysql> alter table Persons add Birth date default getDate();
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'getDate()' at line 1
+mysql> alter table Persons add Birth date default getdate();
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'getdate()' at line 1
+mysql> alter table Persons add Birth date default '2018-05-11';
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Persons alter Birth defalt null;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'defalt null' at line 1
+mysql> alter table Persons add sex default NULL;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'default NULL' at line 1
+mysql> alter table Persons add sex varchar(20) default NULL;
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select count(sex) from Persons;
++------------+
+| count(sex) |
++------------+
+|          0 |
++------------+
+1 row in set
+
+mysql> select count(*) from Persons;s
++----------+
+| count(*) |
++----------+
+|        4 |
++----------+
+1 row in set
+
+    -> ;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 's' at line 1
+mysql> select count(distinct Birth) from Persons;
++-----------------------+
+| count(distinct Birth) |
++-----------------------+
+|                     1 |
++-----------------------+
+1 row in set
+
+mysql> select count(LastName) from Persons where LastName = 'Carter';
++-----------------+
+| count(LastName) |
++-----------------+
+|               2 |
++-----------------+
+1 row in set
+
+mysql> select count(FirstName) from Persons group by LastName;
++------------------+
+| count(FirstName) |
++------------------+
+|                1 |
+|                1 |
+|                2 |
++------------------+
+3 rows in set
+
+mysql> select LastName, 
+count(FirstName) from Persons group by LastName;
++----------+------------------+
+| LastName | count(FirstName) |
++----------+------------------+
+| Adams    |                1 |
+| Bush     |                1 |
+| Carter   |                2 |
++----------+------------------+
+3 rows in set
+mysql> select first(LastName) from Persons;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(LastName) from Persons' at line 1
+mysql> select * from Orders;
+Empty set
+
+mysql> select * from Persons;
++------+----------+-----------+----------------+----------+------------+------+
+| ID_P | LastName | FirstName | Address        | City     | Birth      | sex  |
++------+----------+-----------+----------------+----------+------------+------+
+|    1 | Adams    | John      | Oxford Street  | London   | 2018-05-11 | NULL |
+|    2 | Bush     | George    | Fifth Avenue   | New York | 2018-05-11 | NULL |
+|    3 | Carter   | Thomas    | Changan Street | Beijing  | 2018-05-11 | NULL |
+|    4 | Carter   | William   | Xuanwumen 10   | Beijing  | 2018-05-11 | NULL |
++------+----------+-----------+----------------+----------+------------+------+
+4 rows in set
+
+mysql> select first(LastName) from Persons;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(LastName) from Persons' at line 1
+mysql> SELECT FIRST(LastName) AS FirstOrderPrice FROM Persons;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(LastName) AS FirstOrderPrice FROM Persons' at line 1
+mysql> SELECT LastName FROM Persons limit 1;
++----------+
+| LastName |
++----------+
+| Adams    |
++----------+
+1 row in set
+
+mysql> SELECT LastName FROM Persons limit 50%;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%' at line 1
+mysql> SELECT top 2 LastName FROM Persons;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2 LastName FROM Persons' at line 1
+mysql> SELECT LastName FROM Persons where rownum<=1;
+1054 - Unknown column 'rownum' in 'where clause'
+mysql> SELECT LAST(LastName) as a FROM Persons;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(LastName) as a FROM Persons' at line 1
+mysql> SELECT LastName FROM Persons limit -1
+;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-1' at line 1;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'You have an error in your SQL syntax' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+mysql> SELECT LastName FROM Persons limit -1;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-1' at line 1
+mysql> select LastName from Persons order by ID_P desc limit 1;
++----------+
+| LastName |
++----------+
+| Carter   |
++----------+
+1 row in set
+
+mysql> select max(ID_P) from Persons;
++-----------+
+| max(ID_P) |
++-----------+
+|         4 |
++-----------+
+1 row in set
+
+mysql> select sum(ID_P) from Persons;
++-----------+
+| sum(ID_P) |
++-----------+
+| 10        |
++-----------+
+1 row in set
+
+mysql> select LastName, sum(ID_P) from Persons group by LastName;
++----------+-----------+
+| LastName | sum(ID_P) |
++----------+-----------+
+| Adams    | 1         |
+| Bush     | 2         |
+| Carter   | 7         |
++----------+-----------+
+3 rows in set
+
+mysql> select LastName, sum(ID_P) from Persons group by LastName having sum(ID_P)<7;
++----------+-----------+
+| LastName | sum(ID_P) |
++----------+-----------+
+| Adams    | 1         |
+| Bush     | 2         |
++----------+-----------+
+2 rows in set
+
+mysql> select LastName, sum(ID_P) from Persons group by LastName where sum(ID_P)<7;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where sum(ID_P)<7' at line 1
+mysql> select LastName, sum(ID_P) from Persons where sum(ID_P)<7 group by LastName;
+1111 - Invalid use of group function
+mysql> select LastName, sum(ID_P) from Persons group by LastName having sum(ID_P)<7;'
++----------+-----------+
+| LastName | sum(ID_P) |
++----------+-----------+
+| Adams    | 1         |
+| Bush     | 2         |
++----------+-----------+
+2 rows in set
+
+    -> ;
+    -> ;
+    -> aaa;
+    -> aaa
+    -> 
+    -> 
+    -> 
+    -> 
+    -> 
+    -> a;
+    -> select upcase(LastName) from Persons;
+    -> 
+    -> 
+    -> 
+    -> 
+    -> 
+    -> exit();
+    -> 
+    -> 
+    -> 
+    -> 
+
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''
+
+;
+
+;
+
+aaa;
+
+aaa
+
+a;
+
+select upcase(LastName) from Persons;' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> crea' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1061 - Duplicate key name 'PersonIndex'
+mysql> create index PersonIndex2
+ on P' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> create' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1062 - Duplicate entry 'Carter' for key 'inde0x'
+1064 - You have an error in yo' at line 1
+
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> drop' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> drop d' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Query OK, 0 rows affected
+
+mysql> truncate table Orders' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Query OK, 0 rows affected
+
+mysql> select * from Persons' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '+------+----------+-----------+----------------+----------+
+| ID_P | LastName |' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alte' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alte' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alte' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1065 - Query was empty
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '+------+----------+-----------+----------------+----------+----------+
+| ID_P |' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alte' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1064 - You have an error in your SQL syntax' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'the manual that corresponds to your MySQL server version for the right syntax to' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1146 - Table 'mysql.products' doesn't exist
+mysql> list table;
+1064 - You have' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '->' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> aaa' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> aaa
+    ->
+    ->
+    ->
+    ->
+    ->
+    -> a' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> select upcase(LastName) from Persons' at line 1
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '->
+    ->
+    ->
+    ->
+    ->
+    -> exit()' at line 1
+    -> 
+    -> 
+    -> ;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '->
+    ->
+    ->
+    ->' at line 1
+mysql> select ucase(LastName) as lastname from Persons;
++----------+
+| lastname |
++----------+
+| ADAMS    |
+| BUSH     |
+| CARTER   |
+| CARTER   |
++----------+
+4 rows in set
+
+mysql> select lcase(LastName) from Persons;
++-----------------+
+| lcase(LastName) |
++-----------------+
+| adams           |
+| bush            |
+| carter          |
+| carter          |
++-----------------+
+4 rows in set
+
+mysql> select mid(LastName,1,2) from Persons;
++-------------------+
+| mid(LastName,1,2) |
++-------------------+
+| Ad                |
+| Bu                |
+| Ca                |
+| Ca                |
++-------------------+
+4 rows in set
+
+mysql> select len(LastName) from Persons;
+1305 - FUNCTION mysql.len does not exist
+mysql> select round(ID_P, 5) from Persons;
++----------------+
+| round(ID_P, 5) |
++----------------+
+|              1 |
+|              2 |
+|              3 |
+|              4 |
++----------------+
+4 rows in set
+
+mysql> select round(ID_P,0
+) from Persons;
++---------------+
+| round(ID_P,0) |
++---------------+
+|             1 |
+|             2 |
+|             3 |
+|             4 |
++---------------+
+4 rows in set
+mysql> alter table Orders add number double default 0.00;
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from Orders;
+Empty set
+
+mysql> select now() from Persons;
++---------------------+
+| now()               |
++---------------------+
+| 2018-05-11 17:19:46 |
+| 2018-05-11 17:19:46 |
+| 2018-05-11 17:19:46 |
+| 2018-05-11 17:19:46 |
++---------------------+
+4 rows in set
+
+mysql> select LastName, now() from Persons;
++----------+---------------------+
+| LastName | now()               |
++----------+---------------------+
+| Adams    | 2018-05-11 17:20:22 |
+| Bush     | 2018-05-11 17:20:22 |
+| Carter   | 2018-05-11 17:20:22 |
+| Carter   | 2018-05-11 17:20:22 |
++----------+---------------------+
+4 rows in set
+
+mysql> select LastName, format(now(), 'yyyy/MM/DD') as perdate;
+ 
+1054 - Unknown column 'LastName' in 'field list';
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '54 - Unknown column 'LastName' in 'field list'' at line 1
+mysql> select LastName, format(now(), 'yyyy/MM/DD') as perdate from Persons;
++----------+--------------------+
+| LastName | perdate            |
++----------+--------------------+
+| Adams    | 20,180,511,172,312 |
+| Bush     | 20,180,511,172,312 |
+| Carter   | 20,180,511,172,312 |
+| Carter   | 20,180,511,172,312 |
++----------+--------------------+
+4 rows in set
+
+mysql> select LastName, format(now(), 'yyyy-MM-
+DD') as perdate from Persons;
++----------+--------------------+
+| LastName | perdate            |
++----------+--------------------+
+| Adams    | 20,180,511,172,331 |
+| Bush     | 20,180,511,172,331 |
+| Carter   | 20,180,511,172,331 |
+| Carter   | 20,180,511,172,331 |
++----------+--------------------+
+4 rows in set
+mysql> select LastName, format(now(), 'YYYY
+-MM-DD') as perdate from Persons;
++----------+--------------------+
+| LastName | perdate            |
++----------+--------------------+
+| Adams    | 20,180,511,172,404 |
+| Bush     | 20,180,511,172,404 |
+| Carter   | 20,180,511,172,404 |
+| Carter   | 20,180,511,172,404 |
++----------+--------------------+
+4 rows in set
+mysql> 
