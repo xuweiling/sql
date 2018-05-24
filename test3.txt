@@ -1,0 +1,320 @@
+mysql> -- 创建mydb1数据库，并查看
+    -> create database mydb1;
+Query OK, 1 row affected
+
+mysql> show mydb1;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mydb1' at line 1
+mysql> show create database mydb1;
++----------+----------------------------------------------------------------+
+| Database | Create Database                                                |
++----------+----------------------------------------------------------------+
+| mydb1    | CREATE DATABASE `mydb1` /*!40100 DEFAULT CHARACTER SET utf8 */ |
++----------+----------------------------------------------------------------+
+1 row in set
+
+mysql> -- 2、创建一个mydb2数据库，指定字符编码为gb2312
+    -> create database mydb2 character set gb2312 collate gb2312_bin;
+Query OK, 1 row affected
+
+mysql> -- 3、创建一个mydb3数据库，指定字符编码为utf8,并指定校验规则
+    -> create database mydb3 character utf8 collate utf8_bin;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'utf8 collate utf8_bin' at line 3
+mysql> create database mydb3 character utf8 collate utf8_bin;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'utf8 collate utf8_bin' at line 1
+mysql> create database mydb3 character utf8 collate utf8_bin;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'utf8 collate utf8_bin' at line 1
+mysql> create database mydb3 character utf8 collate utf8_bin;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'utf8 collate utf8_bin' at line 1
+mysql> create database mydb3 character utf collate utf_bin;
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'utf collate utf_bin' at line 1
+mysql> drop table if exists employee;
+1046 - No database selected
+mysql> create table if not exists employee
+    -> (
+    -> id int,
+    -> name varchar(20),
+    -> sex varchar(10),
+    -> birthday date,
+    -> salary float,
+    -> resume text
+    -> );
+1046 - No database selected
+mysql> select mydb1;
+1054 - Unknown column 'mydb1' in 'field list'
+mysql> use mydb1;
+Database changed
+mysql> create table if not exists employee
+    -> (
+    -> id int,
+    -> name varchar(20),
+    -> sex varchar(10),
+    -> birthday date,
+    -> salary float,
+    -> resume text
+    -> );
+1064 - You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> (
+    -> id int,
+    -> name varchar(20),
+    -> sex varchar(10),
+    -> ' at line 2
+mysql> create table if not exists employee
+    -> (
+    -> id int,
+    -> name varchar(20),
+    -> sex varchar(10),
+    -> birthday date,
+    -> salary float,
+    -> resume text
+    -> );
+Query OK, 0 rows affected
+
+mysql> insert into employee values (1,'zhangsan','male','1980-11-25',2000,'good body');
+Query OK, 1 row affected
+
+mysql> insert into employee values(2,"lisi","male","1980-04-25",1000,"good body");
+Query OK, 1 row affected
+
+mysql> insert into employee values(3,"xiaohong","female","1978-11-25",4000,"good girl");
+Query OK, 1 row affected
+
+mysql> -- 将所有员工薪水修改为5000元
+    -> update employee set salary = 5000;
+Query OK, 3 rows affected
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> update employee set salary = 3000 where name = '张三';
+Query OK, 0 rows affected
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> update employee set salary = '4000', sex = 'femal' where name = 'lisi';
+Query OK, 1 row affected
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set salary = salary + 1000 where name = 'xiaohong';
+Query OK, 1 row affected
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> -- select 练习
+    -> create table student(
+    -> id int,
+    -> name varchar(20),
+    -> chinese float,
+    -> english float,
+    -> math float
+    -> );
+Query OK, 0 rows affected
+
+mysql> insert into student(id,name,chinese,english,math) values(1,'张小明',89,78,90);
+Query OK, 1 row affected
+
+mysql> insert into student(id,name,chinese,english,math) values(2,'李进',67,53,95);
+Query OK, 1 row affected
+
+mysql> insert into student(id,name,chinese,english,math) values(3,'王五',87,78,77);
+Query OK, 1 row affected
+
+mysql> insert into student(id,name,chinese,english,math) values(4,'李一',88,98,92);
+Query OK, 1 row affected
+
+mysql> insert into student(id,name,chinese,english,math) values(5,'李来财',82,84,67);
+Query OK, 1 row affected
+
+mysql> insert into student(id,name,chinese,english,math) values(6,'张进宝',55,85,45);
+Query OK, 1 row affected
+
+mysql> insert into student(id,name,chinese,english,math) values(7,'黄蓉',75,65,30);
+Query OK, 1 row affected
+
+mysql> -- 查询表中所有学生的信息
+    -> select * from student;
++----+--------+---------+---------+------+
+| id | name   | chinese | english | math |
++----+--------+---------+---------+------+
+|  1 | 张小明 |      89 |      78 |   90 |
+|  2 | 李进   |      67 |      53 |   95 |
+|  3 | 王五   |      87 |      78 |   77 |
+|  4 | 李一   |      88 |      98 |   92 |
+|  5 | 李来财 |      82 |      84 |   67 |
+|  6 | 张进宝 |      55 |      85 |   45 |
+|  7 | 黄蓉   |      75 |      65 |   30 |
++----+--------+---------+---------+------+
+7 rows in set
+
+mysql> -- 查询表中所有学生的姓名和对应的英语成绩
+    -> select name, english from student;
++--------+---------+
+| name   | english |
++--------+---------+
+| 张小明 |      78 |
+| 李进   |      53 |
+| 王五   |      78 |
+| 李一   |      98 |
+| 李来财 |      84 |
+| 张进宝 |      85 |
+| 黄蓉   |      65 |
++--------+---------+
+7 rows in set
+
+mysql> -- 过滤表中的重复数据
+    -> select distinct * from student;
++----+--------+---------+---------+------+
+| id | name   | chinese | english | math |
++----+--------+---------+---------+------+
+|  1 | 张小明 |      89 |      78 |   90 |
+|  2 | 李进   |      67 |      53 |   95 |
+|  3 | 王五   |      87 |      78 |   77 |
+|  4 | 李一   |      88 |      98 |   92 |
+|  5 | 李来财 |      82 |      84 |   67 |
+|  6 | 张进宝 |      55 |      85 |   45 |
+|  7 | 黄蓉   |      75 |      65 |   30 |
++----+--------+---------+---------+------+
+7 rows in set
+
+mysql> -- 统计每个学生的总分
+    -> -- sum()函数是对一整列求和，对一个记录内的求和是要单独加
+    -> select name, (chinese+english+math) as total from student;
++--------+-------+
+| name   | total |
++--------+-------+
+| 张小明 |   257 |
+| 李进   |   215 |
+| 王五   |   242 |
+| 李一   |   278 |
+| 李来财 |   233 |
+| 张进宝 |   185 |
+| 黄蓉   |   170 |
++--------+-------+
+7 rows in set
+
+mysql> select name, chinese as ch, english en, math ma from student;
++--------+----+----+----+
+| name   | ch | en | ma |
++--------+----+----+----+
+| 张小明 | 89 | 78 | 90 |
+| 李进   | 67 | 53 | 95 |
+| 王五   | 87 | 78 | 77 |
+| 李一   | 88 | 98 | 92 |
+| 李来财 | 82 | 84 | 67 |
+| 张进宝 | 55 | 85 | 45 |
+| 黄蓉   | 75 | 65 | 30 |
++--------+----+----+----+
+7 rows in set
+
+mysql> select name, chinese, english, math from student where name = '李一';
++------+---------+---------+------+
+| name | chinese | english | math |
++------+---------+---------+------+
+| 李一 |      88 |      98 |   92 |
++------+---------+---------+------+
+1 row in set
+
+mysql> select name from student where english>90;
++------+
+| name |
++------+
+| 李一 |
++------+
+1 row in set
+
+mysql> select name from student where english+chinese+math>200;
++--------+
+| name   |
++--------+
+| 张小明 |
+| 李进   |
+| 王五   |
+| 李一   |
+| 李来财 |
++--------+
+5 rows in set
+
+mysql> select name from student where enlish between 80 and 90;
+1054 - Unknown column 'enlish' in 'where clause'
+mysql> select name from student where english between 80 and 90;
++--------+
+| name   |
++--------+
+| 李来财 |
+| 张进宝 |
++--------+
+2 rows in set
+
+mysql> select name from student where math in(89,90,91);
++--------+
+| name   |
++--------+
+| 张小明 |
++--------+
+1 row in set
+
+mysql> select name, english from student where name like '李%';
++--------+---------+
+| name   | english |
++--------+---------+
+| 李进   |      53 |
+| 李一   |      98 |
+| 李来财 |      84 |
++--------+---------+
+3 rows in set
+
+mysql> select name from student where math > 80 and chinese > 80;
++--------+
+| name   |
++--------+
+| 张小明 |
+| 李一   |
++--------+
+2 rows in set
+
+mysql> select name from student where english>80 or english+chinese+math>200;
++--------+
+| name   |
++--------+
+| 张小明 |
+| 李进   |
+| 王五   |
+| 李一   |
+| 李来财 |
+| 张进宝 |
++--------+
+6 rows in set
+
+mysql> select name, math from student order by math;
++--------+------+
+| name   | math |
++--------+------+
+| 黄蓉   |   30 |
+| 张进宝 |   45 |
+| 李来财 |   67 |
+| 王五   |   77 |
+| 张小明 |   90 |
+| 李一   |   92 |
+| 李进   |   95 |
++--------+------+
+7 rows in set
+
+mysql> select * from student order by chinese+math+english desc;
++----+--------+---------+---------+------+
+| id | name   | chinese | english | math |
++----+--------+---------+---------+------+
+|  4 | 李一   |      88 |      98 |   92 |
+|  1 | 张小明 |      89 |      78 |   90 |
+|  3 | 王五   |      87 |      78 |   77 |
+|  5 | 李来财 |      82 |      84 |   67 |
+|  2 | 李进   |      67 |      53 |   95 |
+|  6 | 张进宝 |      55 |      85 |   45 |
+|  7 | 黄蓉   |      75 |      65 |   30 |
++----+--------+---------+---------+------+
+7 rows in set
+
+mysql> select * from student where name like '李%' order by chinese+math+english desc;
++----+--------+---------+---------+------+
+| id | name   | chinese | english | math |
++----+--------+---------+---------+------+
+|  4 | 李一   |      88 |      98 |   92 |
+|  5 | 李来财 |      82 |      84 |   67 |
+|  2 | 李进   |      67 |      53 |   95 |
++----+--------+---------+---------+------+
+3 rows in set
+
+mysql> 
